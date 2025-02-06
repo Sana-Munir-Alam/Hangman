@@ -3,167 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Open Sans", sans-serif;
-    }
-    body {
-        display: flex;
-        padding: 0 10px;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background: #0A192F;
-    }
-    .container {
-        width: 850px;
-        background: #fff;
-        display: flex;
-        gap: 70px;
-        align-items: flex-end;
-        padding: 60px 40px;
-        border-radius: 20px;
-    }
-    .hangman-box img {
-        max-width: 270px;
-    }
-    .hangman-box h1 {
-        font-size: 1.45rem;
-        margin-top: 20px;
-        text-align: center;
-        text-transform: uppercase;
-    }
-    .word-display {
-        display: flex;
-        gap: 10px;
-        list-style: none;
-        align-items: center;
-        justify-content: center;
-    }
-    .word-display .letter {
-        width:28px;
-        font-size: 2rem;
-        font-weight: 600;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 40px;
-        border-bottom: 3px solid #000;
-    }
-    .word-display .letter.guessed {
-        border-color: transparent;
-        margin: -40px 0 35px;
-
-    }
-    .game-box h4{
-        text-align: center;
-        font-size: 1.1rem;
-        font-weight: 500;
-        margin-bottom: 15px;
-    }
-    .game-box h4 b {
-        font-weight: 600;
-    }
-    .game-box .guesses-text b{
-        color: #ff0000;
-    }
-    .game-box .keyboard {
-        display: flex;
-        gap: 5px;
-        flex-wrap: wrap;
-        margin-top: 40px;
-        justify-content: center;;
-    }
-    :where(.game-modal, .keyboard) button {
-        background: #001F3F;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        outline: none;
-        border-radius: 4px;
-        border: none;
-        text-transform: uppercase;
-    }
-    .keyboard button{
-        padding: 7px;
-        width: calc(100% / 9 - 5px);
-    }
-    .keyboard button[disabled]{
-        opacity: 0.6;
-        pointer-events: none;
-    }
-    :where(.game-modal, .keyboard) button:hover {
-        background: #68b0b0;
-    }
-    .game-modal {
-        position: fixed;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height:100%;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 999;
-        display: flex;
-        background: rgba(0,0,0,0.6);
-        transition: opacity 0.4s ease;
-    }
-    .game-modal.show {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    .game-modal .content {
-        background: #fff;
-        max-width: 420px;
-        width: 100%;
-        text-align: center;
-        border-radius: 10px;
-        padding: 30px;
-    }
-    .game-modal img {
-        max-width: 130px;
-        margin-bottom: 20px;
-    }
-    .game-modal h4 {
-        font-size: 1.53rem;
-    }
-    .game-modal p {
-        font-size: 1.15rem;
-        margin: 15px 0 30px;
-        font-weight: 500;
-    }
-    .game-modal p b {
-        color: #5E63BA;
-        font-weight: 600;
-    }
-    .game-modal button{
-        padding: 12px 23px;
-
-    }
-    @media (max-width: 782px){
-        .container{
-            flex-direction: column;
-            padding: 30px 15px;
+    <title>GateScan</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+        body {
+            display: flex;
+            padding: 0 10px;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0A192F;
         }
-        .hangman-box img{
-            max-width: 200px;
+        .container {
+            width: 850px;
+            background: #fff;
+            display: flex;
+            gap: 70px;
+            align-items: flex-end;
+            padding: 60px 40px;
+            border-radius: 20px;
         }
-        .hangman-box h1{
+        .hangman-box img {
+            max-width: 270px;
+        }
+        .hangman-box h1 {
+            font-size: 1.45rem;
+            margin-top: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .word-display {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .word-display .letter {
+            width:28px;
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #000;
+        }
+        .word-display .letter.guessed {
+            border-color: transparent;
+            margin: -40px 0 35px;
+    
+        }
+        .game-box h4{
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .game-box h4 b {
+            font-weight: 600;
+        }
+        .game-box .guesses-text b{
+            color: #ff0000;
+        }
+        .game-box .keyboard {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            justify-content: center;;
+        }
+        :where(.game-modal, .keyboard) button {
+            background: #001F3F;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+            border: none;
+            text-transform: uppercase;
+        }
+        .keyboard button{
+            padding: 7px;
+            width: calc(100% / 9 - 5px);
+        }
+        .keyboard button[disabled]{
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        :where(.game-modal, .keyboard) button:hover {
+            background: #68b0b0;
+        }
+        .game-modal {
+            position: fixed;
             display: none;
+            align-items: center;
+            justify-content: center;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height:100%;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+            display: flex;
+            background: rgba(0,0,0,0.6);
+            transition: opacity 0.4s ease;
         }
-    }
-</style>
+        .game-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .game-modal .content {
+            background: #fff;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        .game-modal img {
+            max-width: 130px;
+            margin-bottom: 20px;
+        }
+        .game-modal h4 {
+            font-size: 1.53rem;
+        }
+        .game-modal p {
+            font-size: 1.15rem;
+            margin: 15px 0 30px;
+            font-weight: 500;
+        }
+        .game-modal p b {
+            color: #5E63BA;
+            font-weight: 600;
+        }
+        .game-modal button{
+            padding: 12px 23px;
+    
+        }
+        .loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #0A192F, #1c437d, #0A192F);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #svg {
+            margin-left: 0px;
+            height: 150px;
+            width: 150px;
+            stroke: white;
+            fill-opacity: 0;
+            stroke-width: 3px;
+            stroke-dasharray: 4500; /* Adjust this value based on the total length of the SVG paths */
+            stroke-dashoffset: 4500; /* Start with the entire path hidden */
+            animation: draw 5s ease-in-out infinite; /* Apply the draw animation */
+        }
+
+        @keyframes draw {
+            0%, 100% {
+                stroke-dashoffset: 4500;
+            }
+            50% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .loading-page h1 {
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin-left: 20px;
+            font-weight: bolder;
+        }
+
+        @media (max-width: 782px){
+            .container{
+                flex-direction: column;
+                padding: 30px 15px;
+                align-items: center;
+            }
+            .hangman-box img{
+                max-width: 200px;
+            }
+            .hangman-box h1{
+                display: none;
+            }
+            .loading-page svg {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loading-page h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
 <body>
+    <div class="loading-page">
+        <!-- Replace the existing SVG with your Hangman SVG -->
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="298.232" height="291" viewBox="0 0 298.232 291">
+            <g id="Group_700" data-name="Group 700" transform="translate(-16059.232 -14400)">
+                <rect id="Rectangle_2987" data-name="Rectangle 2987" width="5" height="289" rx="2.5" transform="translate(16107.232 14400)" stroke="white" stroke-width="3" fill="none"/>
+                <g id="Group_697" data-name="Group 697">
+                    <rect id="Rectangle_2974" data-name="Rectangle 2974" width="5" height="61.733" transform="translate(16150.859 14400.247) rotate(45)" stroke="white" stroke-width="3" fill="none"/>
+                    <rect id="Rectangle_2966" data-name="Rectangle 2966" width="5" height="298.232" rx="2.5" transform="translate(16357.465 14686) rotate(90)" stroke="white" stroke-width="3" fill="none"/>
+                    <rect id="Rectangle_2988" data-name="Rectangle 2988" width="187" height="5" rx="2.5" transform="translate(16107.232 14400)" stroke="white" stroke-width="3" fill="none"/>
+                    <rect id="Rectangle_2989" data-name="Rectangle 2989" width="5" height="49" rx="2.5" transform="translate(16289.232 14401)" stroke="white" stroke-width="3" fill="none"/>
+                    <g id="Group_696" data-name="Group 696">
+                        <rect id="Rectangle_2970" data-name="Rectangle 2970" width="5" height="56" rx="2.5" transform="translate(16289.197 14498.247) rotate(45)" stroke="white" stroke-width="3" fill="none"/>
+                        <rect id="Rectangle_2967" data-name="Rectangle 2967" width="5" height="56" rx="2.5" transform="translate(16291.197 14565.247) rotate(45)" stroke="white" stroke-width="3" fill="none"/>
+                        <rect id="Rectangle_2971" data-name="Rectangle 2971" width="5" height="56" rx="2.5" transform="translate(16290.732 14501.782) rotate(-45)" stroke="white" stroke-width="3" fill="none"/>
+                        <path id="Path_355" data-name="Path 355" d="M5,2.5v51a2.5,2.5,0,0,1-5,0V2.5C0,1.119,5,1.119,5,2.5Z" transform="translate(16288.732 14568.783) rotate(-45)" stroke="white" stroke-width="3" fill="none"/>
+                        <g id="Ellipse_32" data-name="Ellipse 32" transform="translate(16263.732 14445.247)" fill="none" stroke="white" stroke-width="5">
+                            <circle cx="27.5" cy="27.5" r="27.5" stroke="none"/>
+                            <circle cx="27.5" cy="27.5" r="25" fill="none"/>
+                        </g>
+                        <rect id="Rectangle_2990" data-name="Rectangle 2990" width="5" height="73" rx="2.5" transform="translate(16289.232 14498)" stroke="white" stroke-width="3" fill="none"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <h1>Hangman</h1>
+    </div>
     <div class="game-modal">
         <div class="content">
             <img src="lost.gif" alt="gif">
@@ -192,6 +271,13 @@
     </div>
 
     <script>
+        // Simulate loading page
+        gsap.fromTo(".loading-page", { opacity: 1 }, {
+            opacity: 0,
+            display: "none",
+            duration: 1.5,
+            delay: 3.5,
+        });
         const wordList = [
             {
                 word: "guitar",
