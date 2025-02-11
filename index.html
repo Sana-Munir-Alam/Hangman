@@ -356,8 +356,8 @@
                 hint: "I’m a digital shield, protecting your data from unseen threats. What am I?"
             },
             {
-                word: "accomplice",
-                hint: "A person who helps a criminal commit a crime."
+                word: "hangman",
+                hint: " I’m the center of a deadly game, a symbol of justice gone wrong. I swing at the end of a rope, but I’m not a bell. What am I?"
             },
         ];
         
@@ -367,7 +367,8 @@
         const keyboardDiv = document.querySelector(".keyboard");
         const gameModal = document.querySelector(".game-modal");
         const playAgainBtn = document.querySelector(".play-again");
-
+        
+        let usedWords = [];
         let currentWord, correctLetters = [], wrongGuessCount = 0;
         const maxGuesses = 6;
         let wordsGuessed = 0;
@@ -382,11 +383,21 @@
             wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
             gameModal.classList.remove("show");
         }
-
         const getRandomWord = () => {
-            //selecting a random word and hint from the list
-            const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
+            if (wordList.length === 0) {
+                // If all words have been used, reset the wordList array
+                wordList.push(...usedWords);
+                usedWords = [];
+            }
+
+            // Selecting a random word and hint from the list
+            const randomIndex = Math.floor(Math.random() * wordList.length);
+            const { word, hint } = wordList[randomIndex];
             currentWord = word;
+
+            // Remove the selected word from the wordList and add it to usedWords
+            usedWords.push(wordList.splice(randomIndex, 1)[0]);
+
             console.log(word);
             document.querySelector(".hint-text b").innerText = hint;
             resetGame();
@@ -403,7 +414,7 @@
 
                 if (isVictory) {
                     wordsGuessed++;
-                    if (wordsGuessed === 5) {
+                    if (wordsGuessed === 7) {
                         alert("Psst here is the Secret Code: 12345");
                     }
                 }
