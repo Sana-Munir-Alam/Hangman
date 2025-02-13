@@ -10,8 +10,6 @@ Welcome to the **Hangman Game**! This project was created as part of the **Crimi
 - [How to Play](#how-to-play)
 - [Technologies Used](#technologies-used)
 - [Other Project](#other-project-for-this-university-event)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
