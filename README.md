@@ -1,4 +1,4 @@
-# Hangman Game
+# Hangman Game - Incognito Investigation Module
 
 Welcome to the **Hangman Game**! This project was created as part of the **Criminology Investigation** module for my university's signature event **PROCOM**. It serves as a fun and interactive puzzle game where players guess a hidden word before the hangman is fully drawn to get a clue.
 
