@@ -16,7 +16,7 @@ Welcome to the **Hangman Game**! This project was created as part of the **Crimi
 ## About the Project
 This Hangman game is a web-based implementation of the classic word-guessing game. It was developed as part of a university module focused on criminology and investigation. The game includes a variety of words and hints related to mystery, crime, and puzzles, making it both challenging and engaging.
 
-The project was designed to test players' problem-solving skills while providing an entertaining experience. It also includes a secret code feature that unlocksduring the game, hence adding an extra layer of intrigue.
+The project was designed to test players' problem-solving skills while providing an entertaining experience. It also includes a secret code feature that unlocks during the game, adding an extra layer of intrigue.
 
 ---
 
@@ -26,7 +26,7 @@ The project was designed to test players' problem-solving skills while providing
 - **Responsive Design**: Works seamlessly on both desktop and mobile devices.
 - **Animated Loading Screen**: A visually appealing loading animation to enhance user experience.
 - **Win/Lose Conditions**: Players win by guessing the word correctly or lose if the hangman is fully drawn.
-- **Secret Code**: Unlock a secret code after the specific conditions are met.
+- **Secret Code**: Unlock a secret code after specific conditions are met.
 
 ---
 
@@ -37,7 +37,7 @@ The project was designed to test players' problem-solving skills while providing
 4. If the letter is correct, it will appear in the word. If incorrect, a part of the hangman will be drawn.
 5. You have **6 incorrect guesses** before the game ends.
 6. Guess the word correctly to win!
-7. If you are lucky the secret code will be revealed to you.
+7. If you are lucky, the secret code will be revealed to you.
 
 ---
 
@@ -51,4 +51,4 @@ The project was designed to test players' problem-solving skills while providing
 ---
 
 ## Other Project for this University Event
-https://sana-munir-alam.github.io/Gateway/
+[GateScan - Incognito Investigation Module](https://sana-munir-alam.github.io/Gateway/)
